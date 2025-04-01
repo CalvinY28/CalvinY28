@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YNG CLVN</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #counter {
+      font-size: 1.5rem;
+      opacity: 1;
+      transition: opacity 1s ease, color 0.3s ease;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="counter">0</div>
+
+  <script>
+    let count = 0;
+    const maxCount = 100;
+    const counterElement = document.getElementById("counter");
+    let lastScrollTime = Date.now();
+    let decayEnabled = true;
+    let hasTransitioned = false;
+
+    function updateCounter() {
+      counterElement.textContent = count;
+    }
+
+    window.addEventListener('wheel', function(e) { // Scroll down to increase count
+      if (hasTransitioned) return;
+
+      if (e.deltaY > 0 && count < maxCount) {
+        count++;
+        updateCounter();
+        lastScrollTime = Date.now();
+
+        if (count === maxCount) {
+          decayEnabled = false; // Stop decay
+          fadeOutAndRedirect();
+        }
+      }
+    });
+
+    setInterval(() => {
+      if (!decayEnabled || hasTransitioned) return; // Passive decay loop
+
+      const now = Date.now();
+      const idleTime = now - lastScrollTime;
+
+      if (idleTime > 300 && count > 0) {
+        count--;
+        updateCounter();
+      }
+    }, 100);
+
+    function fadeOutAndRedirect() { // Fade out to another page
+      hasTransitioned = true;
+      counterElement.classList.add('fade-out');
+
+      setTimeout(() => {
+        window.location.href = "next.html"; // To your next page
+      }, 1200); // Wait for fadeout
+    }
+  </script>
+</body>
+</html>
