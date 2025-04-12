@@ -6,6 +6,7 @@
 	<meta charset="utf-8">
 	<title>project1</title>
 	<meta name="viewport" content="width=devide-width, initial-scale=1.0" />
+	<link rel="icon" type="Images/jpg" href="Images/cat.jpg"/>
 
 	<style>*{
 		box-sizing: border-box;
@@ -58,6 +59,24 @@
 			border: 2px solid #333;
 		}
 		
+		.home-icon{
+		  position: fixed;
+		  top: 20px;
+		  left 20px;
+		  z-index: 1000;
+		}
+
+		.home-icon img{
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			transition: transform 0.2s ease;
+		}
+
+		.home-icon img{
+		  transform: scale(1.1);
+		}
+		
 		footer{
 			text-align: center;
 			font-size: 1rem;
@@ -71,8 +90,13 @@
 <body>
 	
 	<!-- hehe -->
+	<a href="index.html" class="home-icon">
+		<img src="Images/cat.jpg" alt="Home"/>
+	</a>
 	
 	
+	
+	<footer>2025 Calvin Yang — Portfolio or Something</footer>
 	
 </body>
 	
