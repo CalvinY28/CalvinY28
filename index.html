@@ -4,81 +4,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YNG CLVN</title>
+  <title>Calvin Yang</title>
+	<link rel="icon" type="Images/jpg" href="Images/cat.jpg"/> <!--icon at the top of the screen -->
   <style>
-    body {
-      background-color: #121212;
-      color: white;
-      font-family: sans-serif;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    body{
+		background-color: #121212;
+		color: white;
+		font-family: sans-serif;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100vh;
+		margin: 0;
+	  }
+	  
+	  .title-container{
+		  display: flex;
+		  align-items: center;
+		  gap: 1rem;
+		  margin-bottom: 1rem;
+	  }
+	  .title-container img{
+		  width: 50px;
+		  height: 50px;
+		  border-radius: 8px;
+	  }
+	  
+	  .nav-button{
+		  padding: 0.8rem 1.5rem;
+		  font-size: 1rem;
+		  color: white;
+		  background-color: #333333;
+		  border: none;
+		  border-radius: 8px;
+		  cursor: pointer;
+		  transition: background-color 0.3s ease;
+	  }
+	  
+	  .nav-button:hover{
+		  background-color: #555555;
+		  transform: scale(1.5);
+	  }
+	  
+	h1{
+	  	font-size: 3rem;
+	  }
+	p1{
+		font-size: 1.2rem;
+	  }
 
-    #counter {
-      font-size: 1.5rem;
-      opacity: 1;
-      transition: opacity 1s ease, color 0.3s ease;
-    }
-
-    }
   </style>
 </head>
 
 	
 <body>
-  <div id="counter">0</div>
 
-  <script>
-    let count = 0;
-    const maxCount = 100;
-    const counterElement = document.getElementById("counter");
-    let lastScrollTime = Date.now();
-    let decayEnabled = true;
-    let hasTransitioned = false;
+<!--<div class="title-container">
+	<img src="Images/cat.jpg" alt="b">
+	
+	</div>-->
 
-    function updateCounter() {
-      counterElement.textContent = count;
-    }
-
-    window.addEventListener('wheel', function(e) { // Scroll down to increase count
-      if (hasTransitioned) return;
-
-      if (e.deltaY > 0 && count < maxCount) {
-        count++;
-        updateCounter();
-        lastScrollTime = Date.now();
-
-        if (count === maxCount) {
-          decayEnabled = false; // Stop decay
-          fadeOutAndRedirect();
-        }
-      }
-    });
-
-    setInterval(() => {
-      if (!decayEnabled || hasTransitioned) return; // Passive decay loop
-
-      const now = Date.now();
-      const idleTime = now - lastScrollTime;
-
-      if (idleTime > 300 && count > 0) {
-        count--;
-        updateCounter();
-      }
-    }, 100);
-
-    function fadeOutAndRedirect() { // Fade out to another page
-      hasTransitioned = true;
-      counterElement.classList.add('fade-out');
-
-      setTimeout(() => {
-        window.location.href = "next.html"; // To next page
-      }, 1200); // Wait for fadeout
-    }
-  </script>
+<h1>Welcome to the website</h1>
+<p>Portfolio stuff or wahtvber</p>
+<a href="next.html">
+    <button class="nav-button">Go to Portfolio</button>
+  </a>
 </body>
 
 </html>

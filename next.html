@@ -1,82 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
+	
+	
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YNG CLVN</title>
+  <title>Calvin Yang</title>
+	<link rel="icon" type="Images/jpg" href="Images/cat.jpg"/>
+
   <style>
-    body {
+    {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body{
       background-color: #121212;
       color: white;
-      font-family: sans-serif;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 2rem;
     }
 
-    #counter {
+    header{
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header h1{
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p{
+      font-size: 1.2rem;
+      color: #cccccc;
+    }
+
+    .portfolio-container{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .project{
+      background-color: #2a2a2a;
+      padding: 1.5rem;
+      border-radius: 10px;
+      transition: transform 0.2s ease;
+    }
+
+    .project:hover{
+      transform: scale(1.03);
+    }
+
+    .project img{
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .project h2{
       font-size: 1.5rem;
-      opacity: 1;
-      transition: opacity 1s ease, color 0.3s ease;
+      margin-bottom: 0.5rem;
     }
 
-    .fade-out {
-      opacity: 0;
+    .project p{
+      font-size: 1rem;
+      color: #bbbbbb;
+    }
+	
+	.home-icon{
+      position: fixed;
+      top: 20px;
+      left 20px;
+      z-index: 1000;
+    }
+
+    .home-icon img{
+      	width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		transition: transform 0.2s ease;
+    }
+
+    .home-icon img{
+      transform: scale(1.1);
+    }
+
+    footer{
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 1rem;
+      color: #666666;
     }
   </style>
 </head>
+	
+	
 <body>
-  <div id="counter">0</div>
+	
+  <header>
+    <h1>Calvin Yang</h1>
+    <p>Description of me go here</p>
+  </header>
 
-  <script>
-    let count = 0;
-    const maxCount = 100;
-    const counterElement = document.getElementById("counter");
-    let lastScrollTime = Date.now();
-    let decayEnabled = true;
-    let hasTransitioned = false;
+	<a href="index.html" class="home-icon">
+		<img src="Images/cat.jpg" alt="Home"/>
+	</a>
+	
+  <section class="portfolio-container">
+	
+	<a href="project1.html" class="project-link">
+		<div class="project">
+		  <img src="Images/project1.jpg" alt="Project 1 Preview" />
+		  <a href="index.html" class="home-icon"></a>
+		  <h2>Project Title 1</h2>
+		  <p>description.</p>
+		</div>
+	</a>
 
-    function updateCounter() {
-      counterElement.textContent = count;
-    }
+    <div class="project">
+      <img src="Images/project2.jpg" alt="Project 2 Preview" />
+      <h2>Project Title 2</h2>
+      <p>description</p>
+    </div>
 
-    window.addEventListener('wheel', function(e) { // Scroll down to increase count
-      if (hasTransitioned) return;
+  </section>
 
-      if (e.deltaY > 0 && count < maxCount) {
-        count++;
-        updateCounter();
-        lastScrollTime = Date.now();
+  <footer>2025 Calvin Yang — Portfolio or Something</footer> <!-- Footer (mini text at the bottom of screen) -->
 
-        if (count === maxCount) {
-          decayEnabled = false; // Stop decay
-          fadeOutAndRedirect();
-        }
-      }
-    });
-
-    setInterval(() => {
-      if (!decayEnabled || hasTransitioned) return; // Passive decay loop
-
-      const now = Date.now();
-      const idleTime = now - lastScrollTime;
-
-      if (idleTime > 300 && count > 0) {
-        count--;
-        updateCounter();
-      }
-    }, 100);
-
-    function fadeOutAndRedirect() { // Fade out to another page
-      hasTransitioned = true;
-      counterElement.classList.add('fade-out');
-
-      setTimeout(() => {
-        window.location.href = "next.html"; // To next page
-      }, 1200); // Wait for fadeout
-    }
-  </script>
 </body>
+	
+	
 </html>
