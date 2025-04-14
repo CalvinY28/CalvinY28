@@ -49,7 +49,7 @@
 		
 		.image-grid{
 			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
 			gap: 1rem;
 			margin-top: 1rem;
 		}
@@ -78,6 +78,41 @@
 		  transform: scale(1.1);
 		}
 		
+	  .nav-button{
+		  padding: 0.8rem 1.5rem;
+		  font-size: 3.535rem;
+		  color: white;
+		  background-color: #333333;
+		  border: none;
+		  border-radius: 8px;
+		  cursor: pointer;
+		  transition: background-color 0.3s ease;
+	  }
+	  
+	  .nav-button:hover{
+		  background-color: #555555;
+		  transform: scale(1.2);
+	  }
+		
+		figure{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		
+		figure img{
+			width: 100%;
+			border-radius: 8px;
+			border: 2px solid #333;
+		}
+		
+		figcaption{
+			margin-top: 0.5rem;
+			font-size: 0.9rem;
+			color: #cccccc;
+			text-align: center;
+		}
+		
 		footer{
 			text-align: center;
 			font-size: 1rem;
@@ -95,6 +130,55 @@
 		<img src="Images/cat.jpg" alt="Home"/>
 	</a>
 	
+	<button class="nav-button" onclick="playRandomSound()">Click Here To Play a Random Sound From Our Game!</button>
+	<audio id="audio-player"></audio>
+	
+	<script>
+	
+		  const sounds = [
+			"Sounds/Sound1.wav",
+			"Sounds/Sound2.wav",
+			"Sounds/Sound3.wav",
+			"Sounds/Sound4.wav",
+			"Sounds/Sound5.wav",
+			"Sounds/Sound6.wav",
+			"Sounds/Sound7.wav",
+			"Sounds/Sound8.wav",
+			"Sounds/Sound9.wav",
+			"Sounds/Sound10.wav",
+			"Sounds/Sound11.wav",
+			"Sounds/Sound12.wav",
+			"Sounds/Sound13.wav",
+			"Sounds/Sound14.wav",
+			"Sounds/Sound15.wav",
+			"Sounds/Sound16.wav",
+			"Sounds/Sound17.wav",
+			"Sounds/Sound18.wav",
+			"Sounds/Sound19.wav",
+			"Sounds/Sound20.wav",
+			"Sounds/Sound21.wav",
+			"Sounds/Sound22.wav",
+			"Sounds/Sound23.wav",
+			"Sounds/Sound24.wav",
+			"Sounds/Sound25.wav",
+			"Sounds/Sound26.wav",
+			"Sounds/Sound27.wav",
+			"Sounds/Sound28.wav",
+			"Sounds/Sound29.wav",
+			"Sounds/Sound30.wav",
+			"Sounds/Sound31.wav",
+		  ];
+
+		  function playRandomSound() {
+			const audio = document.getElementById("audio-player");
+			const randomIndex = Math.floor(Math.random() * sounds.length);
+			audio.src = sounds[randomIndex];
+			audio.play();
+			audio.volume = 0.5;
+		  }
+	
+	</script>
+	
 	<header>
 		<h1>Patient R21</h1>
 		<p>A point and click horror puzzle where the player navigates through the hospital they work at, crafting
@@ -105,23 +189,47 @@ you must use your wits to survive and subdue them to beat the game.
 	
 	<section class="section">
 		<h2>In-Game Visuals</h2>
-		<p>Below are screenshots showing development and final build of the game</p>
+		<p>Below are screenshots showing the final build of the game</p>
 		<div class="image-grid">
-			<img src="Images/progress1.jpg" alt="progress Screenshot 1">
-			<img src="Images/progress1.jpg" alt="progress Screenshot 1">
-			<img src="Images/progress1.jpg" alt="progress Screenshot 1">
-			<img src="Images/progress1.jpg" alt="progress Screenshot 1">
+			<figure>
+				<img src="Images/a.gif" alt="progress Screenshot 1">
+				<figcaption>Player start</figcaption>
+			</figure>
+			<figure>
+				<img src="Images/b.gif" alt="progress Screenshot 2">
+				<figcaption>The first cutscene</figcaption>
+			</figure>
+			<figure>
+				<img src="Images/c.gif" alt="progress Screenshot 3">
+				<figcaption>Final puzzle and QTE</figcaption>
+			</figure>
+			<figure>
+				<img src="Images/d.gif" alt="progress Screenshot 4">
+				<figcaption>In engine view of the game</figcaption>
+			</figure>
 		</div>
 	</section>
 	
 	<section class="section">
 		<h2>The Process</h2>
-		<p>Below are screenshots showing process</p>
+		<p>Below are screenshots showing the creation process</p>
 		<div class="image-grid">
-			<img src="Images/progress1.jpg" alt="progress Screenshot 1">
-			<img src="Images/progress1.jpg" alt="progress Screenshot 1">
-			<img src="Images/progress1.jpg" alt="progress Screenshot 1">
-			<img src="Images/progress1.jpg" alt="progress Screenshot 1">
+			<figure>
+				<img src="Images/Capture2.PNG" alt="progress Screenshot 5">
+				<figcaption>Early game idea planning</figcaption>
+			</figure>
+			<figure>
+				<img src="Images/Capture3.PNG" alt="progress Screenshot 6">
+				<figcaption>Metric reference</figcaption>
+			</figure>
+			<figure>
+				<img src="Images/Capture1.PNG" alt="progress Screenshot 7">
+				<figcaption>Early item art planning</figcaption>
+			</figure>
+			<figure>
+				<img src="Images/Capture4.PNG" alt="progress Screenshot 8">
+				<figcaption>Level 2 planning and puzzle ideas</figcaption>
+			</figure>
 		</div>
 	</section>
 	
@@ -156,7 +264,9 @@ you must use your wits to survive and subdue them to beat the game.
 		<p> • Jira/Confluence: Sprint management, general use</p>
 		<p> • Game Production Workflow: Version control with GitHub, scoping, team retrospectives</p>
 		<p>Application to Future Projects</p>
-		<p> • My ability to contribute to the atmosphere, mood, and art can be brought to any genre or style of game in future collborations.</p>
+		<p> • My ability to contribute to the atmosphere and art can be brought to any genre or style of game in future collborations.</p>
+		<p> • My Experiance with production and in engine implementation/scripting will aid in future game development.</p>
+		<p> • The time spent using Jire/Confluence can help in future games with planning and organization.</p>
 	</section>
 	
 	<footer>2025 Calvin Yang — Portfolio or Something - Work in Progress this is gonna be very rough</footer>
