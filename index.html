@@ -14,6 +14,12 @@
       --font: "Segoe UI", sans-serif;
     }
 
+    body.dark {
+      --bg: #121212;
+      --text: #f3f3f3;
+      --accent: #ddd;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -23,6 +29,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--font);
+      transition: background 0.3s, color 0.3s;
     }
 
     /* --- HEADER --- */
@@ -35,9 +42,10 @@
       align-items: center;
       padding: 0.5rem 0rem;
       border-bottom: 2px solid var(--accent);
+	  transition: background 0.3s, border-color 0.3s, color 0.3s;
       z-index: 1000;
-	  max-width: 1290px;
- 	  margin: 0 auto;
+      max-width: 1290px;
+      margin: 0 auto;
     }
 
     header h1 {
@@ -53,6 +61,7 @@
     .nav-btn {
       background: none;
       border: 2px solid var(--accent);
+	  color: var(--text); 
       border-radius: 6px;
       padding: 0.6rem 1.2rem;
       font-size: 1rem;
@@ -62,7 +71,7 @@
 
     .nav-btn:hover {
       background: var(--accent);
-      color: white;
+      color: var(--bg); 
     }
 
     /* --- MAIN --- */
@@ -84,7 +93,7 @@
     main p {
       font-size: 1.1rem;
       margin-bottom: 2rem;
-      color: #333;
+      color: var(--text);
     }
 
     /* --- LINKS --- */
@@ -132,6 +141,12 @@
       transition: transform 0.25s, box-shadow 0.25s;
     }
 
+    .dark .project-card {
+      background: #222;
+      color: #f3f3f3;
+      box-shadow: 0 4px 10px rgba(255,255,255,0.1);
+    }
+
     .project-card:hover {
       transform: scale(1.05);
       box-shadow: 0 6px 15px rgba(0,0,0,0.15);
@@ -145,6 +160,31 @@
       padding-bottom: 2rem;
     }
 
+    /* --- FLOATING TOGGLE BUTTON --- */
+    #theme-toggle {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      cursor: pointer;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s, transform 0.2s;
+      z-index: 2000;
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
     /* --- MOBILE --- */
     @media (max-width: 700px) {
       header {
@@ -155,7 +195,7 @@
 
       .project-card {
         width: 90%;
-        height: 180px;
+        height: 200px;
       }
     }
   </style>
@@ -185,14 +225,31 @@
     <div class="project-grid">
       <div class="project-card">Project 1</div>
       <div class="project-card">Project 2</div>
-	  <div class="project-card">Project 3</div>
-	  <div class="project-card">Project 4</div>
-	  <div class="project-card">Project 5</div>
+      <div class="project-card">Project 3</div>
+      <div class="project-card">Project 4</div>
+      <div class="project-card">Project 5</div>
     </div>
-</main>
+  </main>
 
   <footer>
     © 2025 Calvin Yang — All Rights Reserved
   </footer>
+
+  <!-- Light/Dark Toggle Button -->
+  <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+  <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      if (body.classList.contains('dark')) {
+        toggleBtn.textContent = '☀️';
+      } else {
+        toggleBtn.textContent = '🌙';
+      }
+    });
+  </script>
 </body>
 </html>
