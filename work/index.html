@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<!-- THIS IS THE HTML FOR THE MAIN PAGE -->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calvin Yang</title>
+  <link rel="icon" href="Images/cat.jpg" />
+
+  <style>
+    :root {
+      --bg: #f3f3f3;
+      --text: #111;
+      --accent: #333;
+      --font: "Segoe UI", sans-serif;
+    }
+
+    body.dark {
+      --bg: #121212;
+      --text: #f3f3f3;
+      --accent: #ddd;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+    }
+
+    /* --- HEADER --- */
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0rem;
+      border-bottom: 2px solid var(--accent);
+      z-index: 1000;
+      max-width: 1290px;
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      background: none;
+      border: 2px solid var(--accent);
+	  color: var(--text); 
+      border-radius: 6px;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+	  text-decoration: none;
+	  display: inline-block;
+    }
+
+    .nav-btn:hover {
+      background: var(--accent);
+      color: var(--bg); 
+    }
+
+    /* --- MAIN --- */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    main h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    main p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: var(--text);
+    }
+
+    /* --- LINKS --- */
+    .link-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 1rem;
+    }
+
+    .link-bar a {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 500;
+      transition: color 0.25s;
+    }
+
+    .link-bar a:hover {
+      color: #777;
+    }
+
+    /* --- PROJECT GRID --- */
+    .project-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 15px;
+      width: 600px;
+      height: 440px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .dark .project-card {
+      background: #222;
+      color: #f3f3f3;
+      box-shadow: 0 4px 10px rgba(255,255,255,0.1);
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      margin-top: 3rem;
+      padding-bottom: 2rem;
+    }
+
+    /* --- FLOATING TOGGLE BUTTON --- */
+    #theme-toggle {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      cursor: pointer;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s, transform 0.2s;
+      z-index: 2000;
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    /* --- MOBILE --- */
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .project-card {
+        width: 90%;
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1><a>Calvin Yang</a></h1>
+    <nav>
+      <a href="/" class="nav-btn"><strong>Work</strong></a>
+      <a href="/gallery" class="nav-btn">Gallery</a>
+      <a href="/about" class="nav-btn">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Hello!</h2>
+    <p>Description here</p>
+
+    <div class="link-bar">
+      <a href="#">Email</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Resume</a>
+      <a href="#">GitHub</a>
+    </div>
+
+    <div class="project-grid">
+      <div class="project-card">Project 1</div>
+      <div class="project-card">Project 2</div>
+      <div class="project-card">Project 3</div>
+      <div class="project-card">Project 4</div>
+      <div class="project-card">Project 5</div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Calvin Yang — All Rights Reserved
+  </footer>
+
+  <!-- Light/Dark Toggle Button -->
+  <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+  <script>
+  const body = document.body;
+  const toggleBtn = document.getElementById('theme-toggle');
+
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    body.classList.add('dark');
+    if (toggleBtn) toggleBtn.textContent = '☀️';
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      const isDark = body.classList.contains('dark');
+      toggleBtn.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  }
+</script>
+
+</body>
+</html>
