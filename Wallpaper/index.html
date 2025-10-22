@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wallpapers - Calvin Yang</title>
+  <link rel="icon" href="Images/cat.jpg" />
+
+  <style>
+    :root {
+      --bg: #f3f3f3;
+      --text: #111;
+      --accent: #333;
+      --font: "Segoe UI", sans-serif;
+    }
+
+    body.dark {
+      --bg: #121212;
+      --text: #f3f3f3;
+      --accent: #ddd;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid var(--accent);
+      z-index: 1000;
+      max-width: 1290px;
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    header a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      background: none;
+      border: 2px solid var(--accent);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+      text-decoration: none;
+    }
+
+    .nav-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* MAIN LAYOUT */
+    main {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .project-header {
+      text-align: center;
+    }
+
+    .project-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .project-context {
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+
+    /* FEATURE IMAGE */
+    .feature-image {
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .feature-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* DESCRIPTION */
+    .project-description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      text-align: left;
+      margin: 0 auto;
+      max-width: 900px;
+    }
+
+    /* GALLERY */
+    .project-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .project-item {
+      flex: 1 1 400px;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .project-item img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.25s;
+    }
+
+    .project-item img:hover {
+      transform: scale(1.03);
+    }
+
+    .project-caption {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      margin-top: 4rem;
+      padding-bottom: 2rem;
+    }
+
+    /* DARK MODE TOGGLE */
+    #theme-toggle {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      cursor: pointer;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: background 0.3s, transform 0.2s;
+      z-index: 2000;
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .project-description {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1><a href="/" style="text-decoration:none; color:inherit;">Calvin Yang</a></h1>
+    <nav>
+      <a href="/" class="nav-btn">Work</a>
+      <a href="/gallery" class="nav-btn">Gallery</a>
+      <a href="/about" class="nav-btn">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HEADER -->
+    <section class="project-header">
+      <h2>Wallpapers</h2>
+      <p class="project-context">Game Design | 2025 | Unity</p>
+    </section>
+
+    <!-- FEATURE IMAGE -->
+    <div class="feature-image">
+      <img src="/Images/feature.jpg" alt="Image">
+    </div>
+
+    <!-- DESCRIPTION -->
+    <section class="project-description">
+      <p>blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blahblah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+      <p>blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+    </section>
+
+    <!-- IMAGE GALLERY -->
+    <section class="project-gallery">
+      <div class="project-item">
+        <img src="/Images/project1a.jpg" alt="Image">
+        <p class="project-caption">blah</p>
+      </div>
+
+      <div class="project-item">
+        <img src="/Images/project1b.jpg" alt="Image">
+        <p class="project-caption">blah</p>
+      </div>
+
+      <div class="project-item">
+        <img src="/Images/project1c.jpg" alt="Image">
+        <p class="project-caption">blah</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Calvin Yang — All Rights Reserved
+  </footer>
+
+  <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('theme-toggle');
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark');
+      toggleBtn.textContent = '☀️';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      const isDark = body.classList.contains('dark');
+      toggleBtn.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
