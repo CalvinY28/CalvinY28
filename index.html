@@ -252,6 +252,21 @@
         height: 220px;
       }
     }
+	  
+	/* --- Animations --- */
+	#character {
+	  position: fixed;
+	  bottom: 20px;
+	  left: 100px;
+	  width: 80px;
+	  height: auto;
+	  z-index: 999;
+	  pointer-events: none;
+	  transform-origin: center;
+	  transition: transform 0.2s;
+	  image-rendering: pixelated;
+	}
+	  
   </style>
 </head>
 
@@ -362,8 +377,54 @@
 		}
 		animateHeader();
 	</script>
+	
+	<!-- Character -->
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+		  const character = document.getElementById("character");
 
+		  let posX = 100;
+		  let direction = 1;
+		  let speed = 1.5;
+		  let nextDirectionChange = Date.now() + 2000 + Math.random() * 3000;
 
+		  function randomInRange(min, max) {
+			return Math.random() * (max - min) + min;
+		  }
 
+		  function walk() {
+			const now = Date.now();
+
+			// randomly change direction and speed every few seconds
+			if (now > nextDirectionChange) {
+			  direction = Math.random() < 0.5 ? -1 : 1;
+			  speed = randomInRange(1, 2.5);
+			  nextDirectionChange = now + 2000 + Math.random() * 4000;
+			}
+
+			posX += direction * speed;
+
+			// bounce off edges
+			if (posX < 20) {
+			  posX = 20;
+			  direction = 1;
+			}
+			if (posX > window.innerWidth - 100) {
+			  posX = window.innerWidth - 100;
+			  direction = -1;
+			}
+
+			// updateing visuals
+			character.style.left = posX + "px";
+			character.style.transform = `scaleX(${direction})`;
+
+			requestAnimationFrame(walk);
+		  }
+
+		  walk();
+		});
+	</script>
+	<img id="character" src="Images/cat.gif" alt="Walking Character">
+	
 </body>
 </html>
