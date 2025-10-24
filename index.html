@@ -254,7 +254,7 @@
     }
 	  
 	/* --- Animations --- */
-	#character {
+	.character {
 	  position: fixed;
 	  bottom: 20px;
 	  left: 100px;
@@ -266,6 +266,9 @@
 	  transition: transform 0.2s;
 	  image-rendering: pixelated;
 	}
+	.character:nth-child(1) { left: 100px; }
+	.character:nth-child(2) { left: 250px; }
+	.character:nth-child(3) { left: 400px; }
 	  
   </style>
 </head>
@@ -381,12 +384,16 @@
 	<!-- Character -->
 	<script>
 		document.addEventListener("DOMContentLoaded", () => {
-		  const character = document.getElementById("character");
+		  const characters = document.querySelectorAll(".character");
 
-		  let posX = 100;
-		  let direction = 1;
-		  let speed = 1.5;
-		  let nextDirectionChange = Date.now() + 2000 + Math.random() * 3000;
+		  // character gets its own state
+		  const states = Array.from(characters).map((char, i) => ({
+			el: char,
+			posX: 100 + i * 120, // spread out horizontally
+			direction: Math.random() < 0.5 ? -1 : 1,
+			speed: Math.random() * 1.5 + 1,
+			nextDirectionChange: Date.now() + 2000 + Math.random() * 3000
+		  }));
 
 		  function randomInRange(min, max) {
 			return Math.random() * (max - min) + min;
@@ -395,28 +402,31 @@
 		  function walk() {
 			const now = Date.now();
 
-			// randomly change direction and speed every few seconds
-			if (now > nextDirectionChange) {
-			  direction = Math.random() < 0.5 ? -1 : 1;
-			  speed = randomInRange(1, 2.5);
-			  nextDirectionChange = now + 2000 + Math.random() * 4000;
-			}
+			states.forEach((state) => {
+			  // randomly change direction and speed
+			  if (now > state.nextDirectionChange) {
+				state.direction = Math.random() < 0.5 ? -1 : 1;
+				state.speed = randomInRange(1, 2.5);
+				state.nextDirectionChange = now + 2000 + Math.random() * 4000;
+			  }
 
-			posX += direction * speed;
+			  // move horizontally
+			  state.posX += state.direction * state.speed;
 
-			// bounce off edges
-			if (posX < 20) {
-			  posX = 20;
-			  direction = 1;
-			}
-			if (posX > window.innerWidth - 100) {
-			  posX = window.innerWidth - 100;
-			  direction = -1;
-			}
+			  // bounce off edges
+			  if (state.posX < 20) {
+				state.posX = 20;
+				state.direction = 1;
+			  }
+			  if (state.posX > window.innerWidth - 100) {
+				state.posX = window.innerWidth - 100;
+				state.direction = -1;
+			  }
 
-			// updateing visuals
-			character.style.left = posX + "px";
-			character.style.transform = `scaleX(${direction})`;
+			  // Apply transform and position
+			  state.el.style.left = state.posX + "px";
+			  state.el.style.transform = `scaleX(${state.direction})`;
+			});
 
 			requestAnimationFrame(walk);
 		  }
@@ -424,7 +434,10 @@
 		  walk();
 		});
 	</script>
-	<img id="character" src="Images/cat.gif" alt="Walking Character">
+
+	<img class="character" src="Images/cat.gif" alt="a">
+	<img class="character" src="Images/cat.gif" alt="b">
+	<img class="character" src="Images/cat.gif" alt="c">
 	
 </body>
 </html>
