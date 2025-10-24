@@ -386,12 +386,14 @@
 		document.addEventListener("DOMContentLoaded", () => {
 		  const characters = document.querySelectorAll(".character");
 
-		  // character gets its own state
+		  // loading saved positions
+		  const savedData = JSON.parse(localStorage.getItem("characterPositions") || "[]");
+
 		  const states = Array.from(characters).map((char, i) => ({
 			el: char,
-			posX: 100 + i * 120, // spread out horizontally
-			direction: Math.random() < 0.5 ? -1 : 1,
-			speed: Math.random() * 1.5 + 1,
+			posX: savedData[i]?.posX ?? (100 + i * 120), // restore or default
+			direction: savedData[i]?.direction ?? (Math.random() < 0.5 ? -1 : 1),
+			speed: savedData[i]?.speed ?? (Math.random() * 1.5 + 1),
 			nextDirectionChange: Date.now() + 2000 + Math.random() * 3000
 		  }));
 
@@ -402,7 +404,7 @@
 		  function walk() {
 			const now = Date.now();
 
-			states.forEach((state) => {
+			states.forEach((state, i) => {
 			  // randomly change direction and speed
 			  if (now > state.nextDirectionChange) {
 				state.direction = Math.random() < 0.5 ? -1 : 1;
@@ -423,9 +425,23 @@
 				state.direction = -1;
 			  }
 
-			  // Apply transform and position
+			  // apply transform and position
 			  state.el.style.left = state.posX + "px";
 			  state.el.style.transform = `scaleX(${state.direction})`;
+
+			  // aave every few frames (throttled)
+			  if (i === characters.length - 1 && now % 20 < 1) {
+				localStorage.setItem(
+				  "characterPositions",
+				  JSON.stringify(
+					states.map(s => ({
+					  posX: s.posX,
+					  direction: s.direction,
+					  speed: s.speed
+					}))
+				  )
+				);
+			  }
 			});
 
 			requestAnimationFrame(walk);
