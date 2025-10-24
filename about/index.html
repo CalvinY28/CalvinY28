@@ -222,6 +222,24 @@
         text-align: center;
       }
     }
+	  
+	/* --- Animations --- */
+	.character {
+	  position: fixed;
+	  bottom: 20px;
+	  left: 100px;
+	  width: 80px;
+	  height: auto;
+	  z-index: 999;
+	  pointer-events: none;
+	  transform-origin: center;
+	  transition: transform 0.2s;
+	  image-rendering: pixelated;
+	}
+	.character:nth-child(1) { left: 100px; }
+	.character:nth-child(2) { left: 250px; }
+	.character:nth-child(3) { left: 400px; }
+	  
   </style>
 </head>
 
