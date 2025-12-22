@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <style>
+      body { margin: 8px; }
+      label { display: block; margin-top: 6px; }
+      small { display: block; margin-top: 2px; }
+      a { display: inline-block; margin-top: 6px; cursor: pointer; }
+      button { margin-top: 8px; }
+      #error { margin-top: 8px; }
+    </style>
+  </head>
+  <body>
+    <h1>Login</h1>
+
+    <form id="login-form">
+      <label for="username">Username</label>
+      <input id="username" type="text" />
+      <small id="username-hint"></small>
+
+      <label for="password">Password</label>
+      <input id="password" type="password" />
+      <small id="password-hint"></small>
+
+      <button type="submit">Sign in</button>
+      <div id="error"></div>
+    </form>
+
+    <a href="#" id="forgot-username">Forgot username?</a><br />
+    <a href="#" id="forgot-password">Forgot password?</a>
+
+    <script>
+      const CORRECT_USERNAME = "Alynah";
+      const CORRECT_PASSWORD = "Angeles";
+
+      const form = document.getElementById("login-form");
+      const error = document.getElementById("error");
+
+      form.onsubmit = function (e) {
+        e.preventDefault();
+
+        const enteredUsername = document.getElementById("username").value;
+        const enteredPassword = document.getElementById("password").value;
+
+        if (
+          enteredUsername !== CORRECT_USERNAME ||
+          enteredPassword !== CORRECT_PASSWORD
+        ) {
+          error.textContent = "Incorrect username or password";
+        } else {
+          error.textContent = "";
+          alert("Login successful");
+        }
+      };
+
+      document.getElementById("forgot-username").onclick = function () {
+        document.getElementById("username-hint").textContent =
+          'What is your first name?';
+      };
+
+      document.getElementById("forgot-password").onclick = function () {
+        document.getElementById("password-hint").textContent =
+          'What is your last name?';
+      };
+    </script>
+  </body>
+</html>
