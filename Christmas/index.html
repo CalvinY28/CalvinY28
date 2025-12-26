@@ -48,10 +48,51 @@
           background: linear-gradient(#b30000, #004d26);
           color: #2b2b2b;
         }
+		  
+				  /* Flappy game */
+		.game{
+		  grid-column: 2;              /* puts it under the bio in the center column */
+		  justify-self: center;
+		  width: min(760px, 100%);
+		  margin-top: 18px;
+		  padding: 12px;
+		  background: #ffffffcc;
+		  border: 2px solid #c9a44c;
+		  border-radius: 14px;
+		  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+		  position: static;
+		  z-index: 2;                  /* above background */
+		}
+
+		.game-hud{
+		  display: flex;
+		  justify-content: space-between;
+		  font-weight: bold;
+		  color: #004d26;
+		  margin-bottom: 8px;
+		  font-size: 14px;
+		}
+
+		#flappy{
+		  width: 100%;
+		  height: auto;
+		  display: block;
+		  border-radius: 10px;
+		  background: linear-gradient(#bfe9ff, #eafff2);
+		}
+
+		.game-help{
+		  margin-top: 8px;
+		  font-size: 12px;
+		  color: #2b2b2b;
+		  text-align: center;
+		  user-select: none;
+		}
+
 
         .layout {
           display: grid;
-          grid-template-columns: minmax(150px, 220px) minmax(320px, 720px) minmax(150px, 220px);
+          grid-template-columns: minmax(200px, 280px) minmax(360px, 760px) minmax(200px, 280px);
           gap: 20px;
           justify-content: center;
           align-items: start;
@@ -91,8 +132,8 @@
 
         .img-box img {
           width: 100%;
-          height: 180px;
-          object-fit: cover;
+          height: 100%;
+          object-fit: contain;
           border-radius: 10px;
           display: block;
         }
@@ -159,24 +200,26 @@
           <!-- SET A -->
           <div class="image-set active" data-set="a">
             <div class="img-box">
-              <img src="images/left-top-a.jpg" alt="Left top A" />
-              <div class="img-caption">Holiday Memory</div>
+              <img src="images/IMG_3890.jpg" alt="Left top A" />
             </div>
             <div class="img-box">
-              <img src="images/left-bottom-a.jpg" alt="Left bottom A" />
-              <div class="img-caption">Winter Moment</div>
+              <img src="images/20250920_203021.jpg" alt="Left bottom A" />
+            </div>
+            <div class="img-box">
+              <img src="images/IMG_7937.jpg" alt="Left bottom A2" />
             </div>
           </div>
 
           <!-- SET B -->
           <div class="image-set" data-set="b">
             <div class="img-box">
-              <img src="images/left-top-b.jpg" alt="Left top B" />
-              <div class="img-caption">New Set</div>
+              <img src="images/IMG_4834.jpg" alt="Left top B" />
             </div>
             <div class="img-box">
-              <img src="images/left-bottom-b.jpg" alt="Left bottom B" />
-              <div class="img-caption">New Set</div>
+              <img src="images/IMG_7955.jpg" alt="Left bottom B" />
+            </div>
+            <div class="img-box">
+              <img src="images/spearhyunho.gif" alt="Left bottom B2" />
             </div>
           </div>
         </aside>
@@ -185,10 +228,13 @@
         <section class="bio">
           <h1>MERRY CHRISTMAS ALYNAH!1!!!!11!</h1>
           <p>
-            I wish you the bestest Christmas muauhuahuahuahuah muah. I was orginally gonna do something similar to what you did for my birthday, the cool ass card or smth, but I realized i didnt have shit, I woulda had to buy material glue paper and allat nonsense that ill only use once. So I built a lil chirstmas webby for you, it also easier to type everything out tbh. Anyways, heres your awaited chirstmas letter, I LOVE YOU.
+            I wish you the bestest Christmas muauhuahuahuahuah muah. I was orginally gonna do something similar to what you did for my birthday, the cool ass card or smth, but I realized i didnt have shit, I woulda had to buy material glue paper and allat nonsense that ill only use once. So I built a lil chirstmas webby for you, it also easier to type everything out tbh. Anyways, heres your awaited chirstmas letter, I LOVE YOU. ♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥
           </p>
           <p>
-            Honeslty not sure what Im supposed to write about, maybe ill read urs again as reference. But then like, this is for christmas, I feel like christmas is so much less personal then a birthday. I coulda saved this chance to make a webby for you for valentines day grgrgrrrrg. I guess valentines day can be card and flowers tho. omg anniversary and then valentines day... I am so cooked. so much stuff i need to do for you SO YOU LOVE ME jk. What u wanna do for anniversary, we should probably go out to eat smth or idk, we cant keep getting gifts we gonna run out of space and money and things to give rn. ughhh i just wanna spend a billion dollars on you. Anyway I love you so much my baby i hope you had a great Christmas, ho ho ho and all that idk. Also man we never take photos LOL, we too in the moment.
+            Honeslty not sure what Im supposed to write about, maybe ill read urs again as reference. But then like, this is for christmas, I feel like christmas is so much less personal then a birthday. I coulda saved this chance to make a webby for you for valentines day grgrgrrrrg. I guess valentines day can be card and flowers tho. omg anniversary and then valentines day... I am so cooked. so much stuff i need to do for you SO YOU LOVE ME jk. What u wanna do for anniversary, we should probably go out to eat smth or idk, we cant keep getting gifts we gonna run out of space and money and things to give rn. ughhh i just wanna spend a billion dollars on you. Anyway I love you so much my baby i hope you had a great Christmas, ho ho ho and all that idk. ♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥
+          </p>
+          <p>
+             Also man we never take photos LOL, we too in the moment. And theres a freaky button on the bottom right you can click that and show another set of images. Ugh i feel like this isnt enough for you, YOU NEED MORE woiefjoijweweoijf. ♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥ Enjoy some chatgpt flappy bird at the bottom of the page too.
           </p>
         </section>
 
@@ -197,27 +243,40 @@
           <!-- SET A -->
           <div class="image-set active" data-set="a">
             <div class="img-box">
-              <img src="images/right-top-a.jpg" alt="Right top A" />
-              <div class="img-caption">Seasonal Joy</div>
+              <img src="images/IMG_4406.jpg" alt="Right top A" />
             </div>
             <div class="img-box">
-              <img src="images/right-bottom-a.jpg" alt="Right bottom A" />
-              <div class="img-caption">Christmas Cheer</div>
+              <img src="images/IMG_5021.jpg" alt="Right bottom A" />
+            </div>
+            <div class="img-box">
+              <img src="images/IMG_4758.jpg" alt="Right bottom A2" />
             </div>
           </div>
 
           <!-- SET B -->
           <div class="image-set" data-set="b">
             <div class="img-box">
-              <img src="images/right-top-b.jpg" alt="Right top B" />
-              <div class="img-caption">New Set</div>
+              <img src="images/IMG_8186.jpg" alt="Right top B" />
             </div>
             <div class="img-box">
-              <img src="images/right-bottom-b.jpg" alt="Right bottom B" />
-              <div class="img-caption">New Set</div>
+              <img src="images/IMG_7511.jpg" alt="Right bottom B" />
+            </div>
+            <div class="img-box">
+              <img src="images/spearhyunho.gif" alt="Right bottom B2" />
             </div>
           </div>
         </aside>
+		  
+		<!-- FLAPPY BIRD -->
+		<section class="game" aria-label="Flappy game">
+		  <div class="game-hud">
+			<span id="fb-score">0</span>
+			<span id="fb-best">Best: 0</span>
+		  </div>
+		  <canvas id="flappy" width="520" height="280"></canvas>
+		  <div class="game-help" id="fb-help">Click / Space to flap • R to restart</div>
+		</section>
+		  
       </div>
 
       <!-- BUTTON TO REVEAL A WHOLE NEW SET OF IMAGES -->
@@ -275,6 +334,243 @@
 
         showingSetA = !showingSetA;
       };
+		
+				// --- FLAPPY BIRD (simple canvas version) ---
+		(() => {
+		  const canvas = document.getElementById("flappy");
+		  const scoreEl = document.getElementById("fb-score");
+		  const bestEl = document.getElementById("fb-best");
+		  const helpEl = document.getElementById("fb-help");
+		  if (!canvas) return;
+
+		  const ctx = canvas.getContext("2d");
+
+		  // World
+		  const W = canvas.width;
+		  const H = canvas.height;
+
+		  // Bird
+		  const bird = {
+			x: Math.floor(W * 0.25),
+			y: Math.floor(H * 0.5),
+			r: 12,
+			vy: 0
+		  };
+
+		  // Physics + pipes
+		  const gravity = 0.45;
+		  const flap = -7.5;
+		  const pipeWidth = 56;
+		  const gap = 92;
+		  const pipeSpeed = 2.6;
+		  const spawnEvery = 90; // frames
+
+		  let pipes = [];
+		  let frame = 0;
+		  let score = 0;
+		  let best = Number(localStorage.getItem("flappyBest") || 0);
+		  bestEl.textContent = "Best: " + best;
+
+		  let running = false;
+		  let gameOver = false;
+
+		  function reset() {
+			bird.y = Math.floor(H * 0.5);
+			bird.vy = 0;
+			pipes = [];
+			frame = 0;
+			score = 0;
+			scoreEl.textContent = score;
+			gameOver = false;
+			helpEl.textContent = "Click / Space to flap • R to restart";
+			draw(); // show idle frame
+		  }
+
+		  function start() {
+			if (running) return;
+			running = true;
+			helpEl.textContent = "Click / Space to flap";
+			tick();
+		  }
+
+		  function die() {
+			gameOver = true;
+			running = false;
+			if (score > best) {
+			  best = score;
+			  localStorage.setItem("flappyBest", String(best));
+			  bestEl.textContent = "Best: " + best;
+			}
+			helpEl.textContent = "Game over • Click/Space to try again • R to restart";
+			draw();
+		  }
+
+		  function spawnPipe() {
+			// center of gap
+			const margin = 28;
+			const gapY = Math.floor(
+			  margin + gap / 2 + Math.random() * (H - 2 * margin - gap)
+			);
+			pipes.push({
+			  x: W + 10,
+			  gapY,
+			  passed: false
+			});
+		  }
+
+		  function clamp(v, a, b) {
+			return Math.max(a, Math.min(b, v));
+		  }
+
+		  function circleRectCollides(cx, cy, cr, rx, ry, rw, rh) {
+			const nx = clamp(cx, rx, rx + rw);
+			const ny = clamp(cy, ry, ry + rh);
+			const dx = cx - nx;
+			const dy = cy - ny;
+			return dx * dx + dy * dy <= cr * cr;
+		  }
+
+		  function update() {
+			frame++;
+
+			// Bird
+			bird.vy += gravity;
+			bird.y += bird.vy;
+
+			// Bounds
+			if (bird.y - bird.r <= 0) {
+			  bird.y = bird.r;
+			  bird.vy = 0;
+			}
+			if (bird.y + bird.r >= H) {
+			  bird.y = H - bird.r;
+			  die();
+			  return;
+			}
+
+			// Pipes
+			if (frame % spawnEvery === 0) spawnPipe();
+			for (const p of pipes) p.x -= pipeSpeed;
+			pipes = pipes.filter(p => p.x + pipeWidth > -10);
+
+			// Score + collision
+			for (const p of pipes) {
+			  const topH = p.gapY - gap / 2;
+			  const botY = p.gapY + gap / 2;
+			  const botH = H - botY;
+
+			  // collision (top pipe)
+			  if (circleRectCollides(bird.x, bird.y, bird.r, p.x, 0, pipeWidth, topH)) {
+				die(); return;
+			  }
+			  // collision (bottom pipe)
+			  if (circleRectCollides(bird.x, bird.y, bird.r, p.x, botY, pipeWidth, botH)) {
+				die(); return;
+			  }
+
+			  // score when passing pipe
+			  if (!p.passed && p.x + pipeWidth < bird.x - bird.r) {
+				p.passed = true;
+				score++;
+				scoreEl.textContent = score;
+			  }
+			}
+		  }
+
+		  function draw() {
+			// background
+			ctx.clearRect(0, 0, W, H);
+
+			// subtle ground
+			ctx.fillStyle = "rgba(0, 77, 38, 0.12)";
+			ctx.fillRect(0, H - 26, W, 26);
+
+			// pipes
+			for (const p of pipes) {
+			  const topH = p.gapY - gap / 2;
+			  const botY = p.gapY + gap / 2;
+
+			  // pipe body
+			  ctx.fillStyle = "rgba(0, 77, 38, 0.85)";
+			  ctx.fillRect(p.x, 0, pipeWidth, topH);
+			  ctx.fillRect(p.x, botY, pipeWidth, H - botY);
+
+			  // pipe lip
+			  ctx.fillStyle = "rgba(0, 77, 38, 0.95)";
+			  ctx.fillRect(p.x - 4, topH - 10, pipeWidth + 8, 10);
+			  ctx.fillRect(p.x - 4, botY, pipeWidth + 8, 10);
+			}
+
+			// bird
+			ctx.beginPath();
+			ctx.arc(bird.x, bird.y, bird.r, 0, Math.PI * 2);
+			ctx.fillStyle = "rgba(179, 0, 0, 0.95)";
+			ctx.fill();
+
+			// eye
+			ctx.beginPath();
+			ctx.arc(bird.x + 4, bird.y - 3, 2.2, 0, Math.PI * 2);
+			ctx.fillStyle = "white";
+			ctx.fill();
+
+			// beak
+			ctx.beginPath();
+			ctx.moveTo(bird.x + bird.r, bird.y);
+			ctx.lineTo(bird.x + bird.r + 8, bird.y - 3);
+			ctx.lineTo(bird.x + bird.r + 8, bird.y + 3);
+			ctx.closePath();
+			ctx.fillStyle = "rgba(201, 164, 76, 1)";
+			ctx.fill();
+
+			// idle overlay
+			if (!running && !gameOver) {
+			  ctx.fillStyle = "rgba(0,0,0,0.25)";
+			  ctx.fillRect(0, 0, W, H);
+			  ctx.fillStyle = "white";
+			  ctx.font = "bold 18px Georgia, serif";
+			  ctx.textAlign = "center";
+			  ctx.fillText("Flappy (click / space to start)", W / 2, H / 2);
+			}
+		  }
+
+		  function tick() {
+			if (!running) return;
+			update();
+			draw();
+			if (running) requestAnimationFrame(tick);
+		  }
+
+		  function doFlap() {
+			if (gameOver) {
+			  reset();
+			  start();
+			  bird.vy = flap;
+			  return;
+			}
+			if (!running) start();
+			bird.vy = flap;
+		  }
+
+		  // Controls
+		  canvas.addEventListener("pointerdown", (e) => {
+			e.preventDefault();
+			doFlap();
+		  });
+
+		  window.addEventListener("keydown", (e) => {
+			if (e.code === "Space") {
+			  e.preventDefault();
+			  doFlap();
+			} else if (e.key.toLowerCase() === "r") {
+			  e.preventDefault();
+			  reset();
+			}
+		  });
+
+		  reset();
+		})();
+
+		
     </script>
   </body>
 </html>
