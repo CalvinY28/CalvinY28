@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<!-- THIS IS THE HTML FOR THE ABOUT PAGE -->
+<!-- THIS IS THE HTML FOR THE BLOCKBENCH PAGE -->
 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About - Calvin Yang</title>
+  <title>Wallpapers - Calvin Yang</title>
   <link rel="icon" href="../Images/HeartUIFull.png" />
 
   <style>
@@ -32,7 +32,22 @@
       font-family: var(--font);
     }
 
-    /* --- HEADER --- */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+      z-index: 1500;
+    }
+
+    body:has(.project-item:hover)::before {
+      opacity: 1;
+    }
+	  
+    /* HEADER */
     header {
 	  display: flex;
 	  justify-content: space-between;
@@ -45,7 +60,7 @@
 	  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 	  position: sticky;
 	  top: 2rem;
-	  z-index: 1000;
+	  z-index: 3000;
       margin: 0 auto;
 	  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 	  will-change: transform;
@@ -66,15 +81,15 @@
       font-size: 2rem;
       margin: 0;
     }
-
-    header a {
-      text-decoration: none;
-      color: inherit;
-    }
 	  
 	header h1 a {
 	  text-decoration: none;
 	  color: var(--text);
+    }
+
+    header a {
+      text-decoration: none;
+      color: inherit;
     }
 
     nav {
@@ -92,7 +107,6 @@
       cursor: pointer;
       transition: background 0.25s, color 0.25s, border-color 0.25s;
       text-decoration: none;
-      display: inline-block;
     }
 
     .nav-btn:hover {
@@ -100,84 +114,155 @@
       color: var(--bg);
     }
 
-    /* ABOUT SECTION */
+    /* MAIN LAYOUT */
     main {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1rem;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 3rem 1rem;
-      max-width: 1000px;
-      margin: 0 auto;
+      gap: 2rem;
+    }
+
+    .project-header {
       text-align: center;
     }
 
-    main h2 {
+    .project-header h2 {
       font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.3rem;
     }
 
-    .about-wrapper {
+    .project-context {
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+	  
+	  
+    /* DOWNLOAD SECTION */
+    .project-link {
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .project-link a {
+      display: inline-block;
+      padding: 0.7rem 1.6rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--accent);
+      font-weight: 600;
+      transition: background 0.25s, transform 0.25s;
+    }
+
+    .project-link a:hover {
+      background: #555;
+      transform: scale(1.05);
+    }
+	  
+
+    /* FEATURE IMAGE */
+    .feature-image {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .feature-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* DESCRIPTION */
+    .project-description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      text-align: left;
+      margin: 0 auto;
+      max-width: 900px;
+    }
+
+    /* GALLERY */
+    .project-gallery {
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex-wrap: wrap;
-      gap: 2rem;
+      justify-content: center;
+      gap: 1.5rem;
       margin-top: 2rem;
     }
 
-    .about-image {
-      flex: 1 1 300px;
-      max-width: 350px;
+    .project-item {
+      flex: 1 1 400px;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      z-index: 1600;
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 1rem 1rem 1.2rem;
+      background: var(--bg);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+      transition: transform 0.25s;
+      cursor: zoom-in;
     }
 
-    .about-image img {
+    .project-item img {
       width: 100%;
-      border-radius: 15px;
+      border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       transition: transform 0.25s;
     }
 
-    .about-image img:hover {
-      transform: scale(1.03);
+    .project-caption {
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+      opacity: 0.8;
+      display: inline-block;
+      transform-origin: top center;
+      transition: transform 0.25s, color 0.25s, opacity 0.25s;
     }
 
-    .about-text {
-      flex: 1 1 400px;
-      text-align: left;
-      line-height: 1.6;
-      font-size: 1.1rem;
+    .project-item:hover img {
+      transform: scale(1.05);
     }
 
-    .about-text p {
-      margin-bottom: 1rem;
+    .project-item:hover {
+      transform: scale(1.05);
     }
 
-    .about-links {
-      margin-top: 2rem;
-      border-top: 2px solid var(--accent);
-      padding-top: 1rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
+    .project-item:hover .project-caption {
+      transform: scale(1.08);
+      opacity: 1;
     }
 
-    .about-links a {
-      text-decoration: none;
-      color: var(--accent);
-      font-weight: 500;
-      transition: color 0.25s;
+    .project-item.is-expanded {
+      transform: scale(1.2);
+      z-index: 1800;
+      cursor: zoom-out;
     }
 
-    .about-links a:hover {
-      color: #777;
+    .project-item.is-expanded img {
+      transform: scale(2);
+    }
+
+    .project-item.is-expanded .project-caption {
+      transform: scale(1);
+      opacity: 0;
+      max-height: 0;
+      margin-top: 0;
+      overflow: hidden;
     }
 
     footer {
       text-align: center;
       font-size: 0.9rem;
       opacity: 0.6;
-      margin-top: 3rem;
+      margin-top: 4rem;
       padding-bottom: 2rem;
     }
 
@@ -213,12 +298,7 @@
         gap: 0.5rem;
       }
 
-      .about-wrapper {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .about-text {
+      .project-description {
         text-align: center;
       }
     }
@@ -249,29 +329,69 @@
     <nav>
       <a href="/" class="nav-btn">Work</a>
       <a href="/gallery" class="nav-btn">Gallery</a>
-      <a href="/about" class="nav-btn"><strong>About</strong></a>
+      <a href="/about" class="nav-btn">About</a>
     </nav>
   </header>
 
   <main>
-    <h2>About Me</h2>
-    <div class="about-wrapper">
-      <div class="about-image">
-        <img src="../Images/me.png" alt="Image">
-      </div>
-      <div class="about-text">
-        <p>Hi, I’m <strong>Calvin Yang</strong>. Looks like you want to know more about me! Well for starters, I'm born and raised in <strong>Mississauga</strong>, and I've always had a passion for a variety of games, from competitive shooters and horror games to farming and heartfelt story games.</p>
-        <p>I enjoy experimenting across tools and engines like <strong>Unity</strong>, <strong>Unreal</strong>, and <strong>spreadsheet</strong> simulations to organize and layout my entire life. My projects often explore small mechanics with big expressive potential, making games that feel alive through the choices players make.</p>
-        <p>When I'm not designing, you can find me sketching concepts, fixating on a random personal projects, or playing my favorite game, <strong>League of Legends</strong>.</p>
-      </div>
+    <!-- HEADER -->
+    <section class="project-header">
+      <h2>Wallpapers</h2>
+      <p class="project-context">Programing and Pixel Art | 2024 | Unity and Wallpaper Engine</p>
+    </section>
+
+    <!-- FEATURE IMAGE -->
+    <div class="feature-image">
+      <img src="../Images/wallpaper1.png" alt="Image">
+    </div>
+	  
+    <!-- DOWNLOAD / PLAY LINK -->
+    <div class="project-link">
+      <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3241171725" target="_blank">Check it out! Sheep Sheep Meadows</a>
+    </div>
+	  
+    <div class="project-link">
+      <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3288779670" target="_blank">Check it out! Evening Walk</a>
     </div>
 
-    <div class="about-links">
-      <a href="mailto:calvinoct28@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/yng-clvn/" target="_blank">LinkedIn</a>
-      <a href="../PDFs/Resume.pdf" target="_blank">Resume</a>
-      <a href="https://github.com/CalvinY28" target="_blank">GitHub</a>
-    </div>
+    <!-- DESCRIPTION -->
+    <section class="project-description">
+      <p>These two wallpaper were made by yours truly in the summer of 2024, a little solo project, each taking around a month of time. The tools used are Unity, Clip Studio Paint, Aseprite, and Wallpaper Engine. </p>
+      <p>My goals for this project were to expand my grasp of Unity and pixel art. My motivations came from some of the pixel wallpapers that Wallpaper Engine gives out on install.</p>
+    </section>
+
+    <!-- IMAGE GALLERY -->
+    <section class="project-gallery">
+      <div class="project-item">
+        <img src="../Images/wallpaper2.gif" alt="Image">
+        <p class="project-caption">A preview of Sheep Sheep Meadows</p>
+      </div>
+
+      <div class="project-item">
+        <img src="../Images/wallpaper3.gif" alt="Image">
+        <p class="project-caption">A Preview of Evening Walk</p>
+      </div>
+
+	  <div class="project-item">
+        <img src="../Images/wallpaper7.PNG" alt="Image">
+        <p class="project-caption">Some finished assets layed out.</p>
+      </div>
+		
+	  <div class="project-item">
+        <img src="../Images/wallpaper5.gif" alt="Image">
+        <p class="project-caption">Some early art and layering, wanted to ensure the cats silohete is recognizable.</p>
+      </div>
+		
+	  <div class="project-item">
+        <img src="../Images/wallpaper6.PNG" alt="Image">
+        <p class="project-caption">Early concepts, wanted simple colors and a limited palette.</p>
+      </div>
+		
+      <div class="project-item">
+        <img src="../Images/wallpaper4.PNG" alt="Image">
+        <p class="project-caption">Flat colors of some foliage</p>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -284,19 +404,32 @@
     const body = document.body;
     const toggleBtn = document.getElementById('theme-toggle');
 
-    // Load saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
       body.classList.add('dark');
       toggleBtn.textContent = '☀️';
     }
 
-    // Toggle and save theme
     toggleBtn.addEventListener('click', () => {
       body.classList.toggle('dark');
       const isDark = body.classList.contains('dark');
       toggleBtn.textContent = isDark ? '☀️' : '🌙';
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+	
+	
+  <script>
+    const galleryItems = document.querySelectorAll('.project-item');
+
+    galleryItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        const isExpanded = item.classList.contains('is-expanded');
+        galleryItems.forEach((other) => other.classList.remove('is-expanded'));
+        if (!isExpanded) {
+          item.classList.add('is-expanded');
+        }
+      });
     });
   </script>
 	
@@ -342,7 +475,7 @@
 		document.addEventListener("DOMContentLoaded", () => {
 		  const characters = document.querySelectorAll(".character");
 
-		  // load saved positions
+		  // Load saved positions if available
 		  const savedData = JSON.parse(localStorage.getItem("characterPositions") || "[]");
 
 		  const states = Array.from(characters).map((char, i) => ({
@@ -361,17 +494,17 @@
 			const now = Date.now();
 
 			states.forEach((state, i) => {
-			  // randomly change direction and speed
+			  // Randomly change direction and speed
 			  if (now > state.nextDirectionChange) {
 				state.direction = Math.random() < 0.5 ? -1 : 1;
 				state.speed = randomInRange(1, 2.5);
 				state.nextDirectionChange = now + 2000 + Math.random() * 4000;
 			  }
 
-			  // move horizontally
+			  // Move horizontally
 			  state.posX += state.direction * state.speed;
 
-			  // bounce off edges
+			  // Bounce off edges
 			  if (state.posX < 20) {
 				state.posX = 20;
 				state.direction = 1;
@@ -381,11 +514,11 @@
 				state.direction = -1;
 			  }
 
-			  // apply transform and position
+			  // Apply transform and position
 			  state.el.style.left = state.posX + "px";
 			  state.el.style.transform = `scaleX(${state.direction})`;
 
-			  // save every few frames (throttled)
+			  // Save every few frames (throttled)
 			  if (i === characters.length - 1 && now % 20 < 1) {
 				localStorage.setItem(
 				  "characterPositions",
