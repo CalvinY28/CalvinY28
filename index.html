@@ -271,6 +271,30 @@
 	.character:nth-child(2) { left: 250px; }
 	.character:nth-child(3) { left: 400px; }
 	  
+	  /* --- Character Toggle Button --- */
+	  #character-toggle {
+		position: fixed;
+		bottom: 25px;
+		left: 25px;
+		background: var(--accent);
+		color: var(--bg);
+		border: none;
+		border-radius: 999px;
+		padding: 0.55rem 0.9rem;
+		cursor: pointer;
+		font-size: 0.95rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+		transition: transform 0.2s, background 0.3s;
+		z-index: 2000;
+	  }
+
+	  #character-toggle:hover {
+		transform: scale(1.05);
+	  }
+	  
   </style>
 </head>
 
@@ -287,7 +311,7 @@
   <main>
 	<h2>⚠ SITE UNDER CONSTRUCTION ⚠</h2>
     <h2>Greetings!</h2>
-    <p>I'm a <strong>game designer</strong> passionate in creating experiences for everyone to enjoy. Welcome to my website, feel free to contact me to connect or for an opportunity to work togethour.</p>
+    <p>I'm a <strong>game designer</strong> passionate in creating experiences for everyone to enjoy. Welcome to my website, feel free to contact me to connect or for an opportunity to work together.</p>
 
     <div class="link-bar">
       <a href="mailto:calvinoct28@gmail.com">Email</a>
@@ -326,6 +350,8 @@
 
   <!-- Light/Dark Toggle Button -->
   <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  <button id="character-toggle" aria-label="Toggle characters">🧍 On</button>
+
 
 	<script>
 	  const body = document.body;
@@ -385,72 +411,122 @@
 	
 	<!-- Character -->
 	<script>
-		document.addEventListener("DOMContentLoaded", () => {
-		  const characters = document.querySelectorAll(".character");
+	  document.addEventListener("DOMContentLoaded", () => {
+		const characters = Array.from(document.querySelectorAll(".character"));
+		const toggleBtn = document.getElementById("character-toggle");
 
-		  // loading saved positions
-		  const savedData = JSON.parse(localStorage.getItem("characterPositions") || "[]");
+		const STORAGE_KEY = "charactersEnabled";
+		const POS_KEY = "characterPositions";
 
-		  const states = Array.from(characters).map((char, i) => ({
-			el: char,
-			posX: savedData[i]?.posX ?? (100 + i * 120), // restore or default
-			direction: savedData[i]?.direction ?? (Math.random() < 0.5 ? -1 : 1),
-			speed: savedData[i]?.speed ?? (Math.random() * 1.5 + 1),
-			nextDirectionChange: Date.now() + 2000 + Math.random() * 3000
-		  }));
+		// default ON unless user previously toggled
+		let enabled = localStorage.getItem(STORAGE_KEY);
+		enabled = enabled === null ? true : (enabled === "true");
 
-		  function randomInRange(min, max) {
-			return Math.random() * (max - min) + min;
-		  }
+		let rafId = null;
 
-		  function walk() {
-			const now = Date.now();
+		function setButtonLabel() {
+		  if (!toggleBtn) return;
+		  toggleBtn.textContent = enabled ? "🧍 On" : "🚫 Off";
+		}
 
-			states.forEach((state, i) => {
-			  // randomly change direction and speed
-			  if (now > state.nextDirectionChange) {
-				state.direction = Math.random() < 0.5 ? -1 : 1;
-				state.speed = randomInRange(1, 2.5);
-				state.nextDirectionChange = now + 2000 + Math.random() * 4000;
-			  }
+		function applyVisibility() {
+		  characters.forEach(el => {
+			el.style.display = enabled ? "" : "none";
+		  });
+		}
 
-			  // move horizontally
-			  state.posX += state.direction * state.speed;
+		// loading saved positions
+		const savedData = JSON.parse(localStorage.getItem(POS_KEY) || "[]");
 
-			  // bounce off edges
-			  if (state.posX < 20) {
-				state.posX = 20;
-				state.direction = 1;
-			  }
-			  if (state.posX > window.innerWidth - 100) {
-				state.posX = window.innerWidth - 100;
-				state.direction = -1;
-			  }
+		const states = characters.map((char, i) => ({
+		  el: char,
+		  posX: savedData[i]?.posX ?? (100 + i * 120),
+		  direction: savedData[i]?.direction ?? (Math.random() < 0.5 ? -1 : 1),
+		  speed: savedData[i]?.speed ?? (Math.random() * 1.5 + 1),
+		  nextDirectionChange: Date.now() + 2000 + Math.random() * 3000
+		}));
 
-			  // apply transform and position
-			  state.el.style.left = state.posX + "px";
-			  state.el.style.transform = `scaleX(${state.direction})`;
+		function randomInRange(min, max) {
+		  return Math.random() * (max - min) + min;
+		}
 
-			  // aave every few frames (throttled)
-			  if (i === characters.length - 1 && now % 20 < 1) {
-				localStorage.setItem(
-				  "characterPositions",
-				  JSON.stringify(
-					states.map(s => ({
-					  posX: s.posX,
-					  direction: s.direction,
-					  speed: s.speed
-					}))
-				  )
-				);
-			  }
-			});
+		function savePositions() {
+		  localStorage.setItem(
+			POS_KEY,
+			JSON.stringify(
+			  states.map(s => ({
+				posX: s.posX,
+				direction: s.direction,
+				speed: s.speed
+			  }))
+			)
+		  );
+		}
 
-			requestAnimationFrame(walk);
-		  }
+		function walk() {
+		  if (!enabled) return; // stop scheduling frames when off
 
-		  walk();
-		});
+		  const now = Date.now();
+
+		  states.forEach((state, i) => {
+			if (now > state.nextDirectionChange) {
+			  state.direction = Math.random() < 0.5 ? -1 : 1;
+			  state.speed = randomInRange(1, 2.5);
+			  state.nextDirectionChange = now + 2000 + Math.random() * 4000;
+			}
+
+			state.posX += state.direction * state.speed;
+
+			if (state.posX < 60) {
+			  state.posX = 60;
+			  state.direction = 1;
+			}
+			if (state.posX > window.innerWidth - 300) {
+			  state.posX = window.innerWidth - 300;
+			  state.direction = -1;
+			}
+
+			state.el.style.left = state.posX + "px";
+			state.el.style.transform = `scaleX(${state.direction})`;
+
+			// throttle saves a bit
+			if (i === states.length - 1 && now % 20 < 1) savePositions();
+		  });
+
+		  rafId = requestAnimationFrame(walk);
+		}
+
+		function start() {
+		  if (rafId) cancelAnimationFrame(rafId);
+		  rafId = requestAnimationFrame(walk);
+		}
+
+		function stop() {
+		  if (rafId) cancelAnimationFrame(rafId);
+		  rafId = null;
+		  savePositions();
+		}
+
+		function setEnabled(next) {
+		  enabled = next;
+		  localStorage.setItem(STORAGE_KEY, String(enabled));
+		  setButtonLabel();
+		  applyVisibility();
+		  if (enabled) start();
+		  else stop();
+		}
+
+		// init UI + state
+		setButtonLabel();
+		applyVisibility();
+		if (enabled) start();
+
+		if (toggleBtn) {
+		  toggleBtn.addEventListener("click", () => {
+			setEnabled(!enabled);
+		  });
+		}
+	  });
 	</script>
 
 	<img class="character" src="Images/Rat.gif" alt="a">
