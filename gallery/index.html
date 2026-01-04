@@ -448,7 +448,7 @@
 
 		// default ON unless user previously toggled
 		let enabled = localStorage.getItem(STORAGE_KEY);
-		enabled = enabled === null ? true : (enabled === "true");
+		enabled = enabled === null ? false : (enabled === "true");
 
 		let rafId = null;
 
