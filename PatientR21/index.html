@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+
+<!-- THIS IS THE HTML FOR THE PATIENTR21 PAGE -->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient R-21 - Calvin Yang</title>
+  <link rel="icon" href="../Images/HeartUIFull.png" />
+
+  <style>
+    :root {
+      --bg: #f3f3f3;
+      --text: #111;
+      --accent: #333;
+      --font: "Segoe UI", sans-serif;
+    }
+
+    body.dark {
+      --bg: #121212;
+      --text: #f3f3f3;
+      --accent: #ddd;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+      z-index: 1500;
+    }
+
+    body:has(.project-item:hover)::before {
+      opacity: 1;
+    }
+	  
+    /* HEADER */
+    header {
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  padding: 0.8rem 2rem;
+	  border: 2px solid var(--accent);
+	  border-radius: 50px;
+	  max-width: 1300px;
+	  margin: 1rem auto;
+	  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+	  position: sticky;
+	  top: 2rem;
+	  z-index: 3000;
+      margin: 0 auto;
+	  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+	  will-change: transform;
+		
+	  background: rgba(255, 255, 255, 0.2);
+	  backdrop-filter: blur(8px) saturate(140%);
+	  -webkit-backdrop-filter: blur(8px) saturate(140%);
+
+	  transition: background 0.3s, border-color 0.3s, transform 0.2s;
+    }
+	  
+	body.dark header {
+	  background: rgba(18, 18, 18, 0.4);
+	  border-color: rgba(255, 255, 255, 0.2);
+	}
+
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+	  
+	header h1 a {
+	  text-decoration: none;
+	  color: var(--text);
+    }
+
+    header a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      background: none;
+      border: 2px solid var(--accent);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+      text-decoration: none;
+    }
+
+    .nav-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* MAIN LAYOUT */
+    main {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .project-header {
+      text-align: center;
+    }
+
+    .project-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .project-context {
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+	  
+	  
+    /* DOWNLOAD SECTION */
+    .project-link {
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .project-link a {
+      display: inline-block;
+      padding: 0.7rem 1.6rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--accent);
+      font-weight: 600;
+      transition: background 0.25s, transform 0.25s;
+    }
+
+    .project-link a:hover {
+      background: #555;
+      transform: scale(1.05);
+    }
+	  
+
+    /* FEATURE IMAGE */
+    .feature-image {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .feature-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* DESCRIPTION */
+    .project-description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      text-align: left;
+      margin: 0 auto;
+      max-width: 900px;
+    }
+
+    /* GALLERY */
+    .project-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .project-item {
+      flex: 1 1 400px;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      z-index: 1600;
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 1rem 1rem 1.2rem;
+      background: var(--bg);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+      transition: transform 0.25s;
+      cursor: zoom-in;
+    }
+
+    .project-item img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.25s;
+    }
+
+    .project-caption {
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+      opacity: 0.8;
+      display: inline-block;
+      transform-origin: top center;
+      transition: transform 0.25s, color 0.25s, opacity 0.25s;
+    }
+
+    .project-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .project-item:hover {
+      transform: scale(1.05);
+    }
+
+    .project-item:hover .project-caption {
+      transform: scale(1.08);
+      opacity: 1;
+    }
+
+    .project-item.is-expanded {
+      transform: scale(1.2);
+      z-index: 1800;
+      cursor: zoom-out;
+    }
+
+    .project-item.is-expanded img {
+      transform: scale(2);
+    }
+
+    .project-item.is-expanded .project-caption {
+      transform: scale(1);
+      opacity: 0;
+      max-height: 0;
+      margin-top: 0;
+      overflow: hidden;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      margin-top: 4rem;
+      padding-bottom: 2rem;
+    }
+
+    /* DARK MODE TOGGLE */
+    #theme-toggle {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      cursor: pointer;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: background 0.3s, transform 0.2s;
+      z-index: 2000;
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .project-description {
+        text-align: center;
+      }
+    }
+	  
+	/* --- Animations --- */
+	.character {
+	  position: fixed;
+	  bottom: 20px;
+	  left: 100px;
+	  width: 80px;
+	  height: auto;
+	  z-index: 999;
+	  pointer-events: none;
+	  transform-origin: center;
+	  transition: transform 0.2s;
+	  image-rendering: pixelated;
+	}
+	.character:nth-child(1) { left: 100px; }
+	.character:nth-child(2) { left: 250px; }
+	.character:nth-child(3) { left: 400px; }
+	  
+	  /* --- Character Toggle Button --- */
+	  #character-toggle {
+		position: fixed;
+		bottom: 25px;
+		left: 25px;
+		background: var(--accent);
+		color: var(--bg);
+		border: none;
+		border-radius: 999px;
+		padding: 0.55rem 0.9rem;
+		cursor: pointer;
+		font-size: 0.95rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+		transition: transform 0.2s, background 0.3s;
+		z-index: 2000;
+	  }
+
+	  #character-toggle:hover {
+		transform: scale(1.05);
+	  }
+	  
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1><a href="/" style="text-decoration:none; color:inherit;">Calvin Yang</a></h1>
+    <nav>
+      <a href="/" class="nav-btn">Work</a>
+      <a href="/gallery" class="nav-btn">Gallery</a>
+      <a href="/about" class="nav-btn">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HEADER -->
+    <section class="project-header">
+      <h2>Patient R-21</h2>
+      <p class="project-context">Art Assets, Sound Design, and Game Design | 2025 | Unity, Audacity, Confluence, Jira, Github and Photoshop</p>
+    </section>
+
+    <!-- FEATURE IMAGE -->
+    <div class="feature-image">
+      <img src="../Images/a.gif" alt="Image">
+    </div>
+	  
+    <!-- DOWNLOAD / PLAY LINK -->
+    <div class="project-link">
+      <a href="https://github.com/Tobogganeer/SilliesBigGame" target="_blank">Check out the source and builds on Github!</a>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <section class="project-description">
+      <p>Patient R-21 is a first-person point-and-click horror puzzle game.
+		Follow the story of a doctor experimenting on a captive patient, solving puzzles to escape once the patient breaks free.
+		Me and a team of 4 other talented individuals created an MVP (minimal viable product) of the game 2 levels in 8 months (1 class across 2 semesters).</p>
+      <p>I contributed to this project across several areas. In terms of <strong>Roles</strong>, I focused primarily on game design, helping to create the level layout and designing puzzles that supported the intended pacing and learning curve, while also producing key art assets, specifically inventory items, and implementing <strong>all sound assets</strong>, including effects and ambient audio.</p>
+      <p>The main <stronge>Challenges</stronge> I encountered were scope and time management, as puzzle iteration, audio polishing, and asset creation all competed for limited development time, requiring careful prioritization and iteration. Through this process, I developed new <strong>Skills Gained</strong>, including stronger level design fundamentals, improved puzzle readability, and practical experience designing and integrating sound to enhance player feedback and atmosphere.</p>
+    </section>
+
+    <!-- IMAGE GALLERY -->
+    <section class="project-gallery">
+      <div class="project-item">
+        <img src="../Images/roomplanning2.jpg" alt="Image">
+        <p class="project-caption">Room Planning in Confluence</p>
+      </div>
+
+      <div class="project-item">
+        <img src="../Images/whiteboard.jpg" alt="Image">
+        <p class="project-caption">Dot Voting for Ideation</p>
+      </div>
+
+	  <div class="project-item">
+        <img src="../Images/d.gif" alt="Image">
+        <p class="project-caption">Outside View</p>
+      </div>
+		
+	  <div class="project-item">
+        <img src="../Images/b.gif" alt="Image">
+        <p class="project-caption">Gameplay - Patient Interaction and Cutscene</p>
+      </div>
+		
+	  <div class="project-item">
+        <img src="../Images/c.gif" alt="Image">
+        <p class="project-caption">More Gameplay</p>
+      </div>
+		
+	  <div class="project-item">
+        <img src="../Images/artassets.png" alt="Image">
+        <p class="project-caption">Art Assets</p>
+      </div>
+		
+	  <div class="project-item">
+        <img src="../Images/Capture1.PNG" alt="Image">
+        <p class="project-caption">Style Planning</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Calvin Yang — All Rights Reserved
+  </footer>
+
+  <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  <button id="character-toggle" aria-label="Toggle characters">🧍 On</button>
+
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('theme-toggle');
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark');
+      toggleBtn.textContent = '☀️';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      const isDark = body.classList.contains('dark');
+      toggleBtn.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+	
+	
+  <script>
+    const galleryItems = document.querySelectorAll('.project-item');
+
+    galleryItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        const isExpanded = item.classList.contains('is-expanded');
+        galleryItems.forEach((other) => other.classList.remove('is-expanded'));
+        if (!isExpanded) {
+          item.classList.add('is-expanded');
+        }
+      });
+    });
+  </script>
+	
+	
+	<!-- Bouncy Header -->
+	<script>
+		let lastScroll = 0;
+		let velocity = 0;
+		let targetY = 0;
+		let currentY = 0;
+
+		function lerp(a, b, t) {
+		  return a + (b - a) * t;
+		}
+
+		window.addEventListener("scroll", () => {
+		  const scrollY = window.scrollY;
+		  const delta = scrollY - lastScroll;
+		  velocity += delta * 0.25; // scroll influence
+		  lastScroll = scrollY;
+		});
+
+		function animateHeader() {
+		  targetY += velocity;
+		  velocity *= 0.8; // friction
+		  targetY *= 0.4; // spring back
+		  currentY = lerp(currentY, targetY, 0.2);
+
+		  // trying to stretch and squash
+		  const stretch = 1 - Math.min(Math.abs(velocity) * 0.01, 0.15);
+		  const scaleY = velocity > 0 ? stretch : 1 / stretch;
+
+		  const header = document.querySelector("header");
+		  header.style.transform = `translateY(${currentY}px) scaleY(${scaleY})`;
+
+		  requestAnimationFrame(animateHeader);
+		}
+		animateHeader();
+	</script>
+	
+	<!-- Character -->
+	<script>
+	  document.addEventListener("DOMContentLoaded", () => {
+		const characters = Array.from(document.querySelectorAll(".character"));
+		const toggleBtn = document.getElementById("character-toggle");
+
+		const STORAGE_KEY = "charactersEnabled";
+		const POS_KEY = "characterPositions";
+
+		// default ON unless user previously toggled
+		let enabled = localStorage.getItem(STORAGE_KEY);
+		enabled = enabled === null ? false : (enabled === "true");
+
+		let rafId = null;
+
+		function setButtonLabel() {
+		  if (!toggleBtn) return;
+		  toggleBtn.textContent = enabled ? "🧍 On" : "🚫 Off";
+		}
+
+		function applyVisibility() {
+		  characters.forEach(el => {
+			el.style.display = enabled ? "" : "none";
+		  });
+		}
+
+		// loading saved positions
+		const savedData = JSON.parse(localStorage.getItem(POS_KEY) || "[]");
+
+		const states = characters.map((char, i) => ({
+		  el: char,
+		  posX: savedData[i]?.posX ?? (100 + i * 120),
+		  direction: savedData[i]?.direction ?? (Math.random() < 0.5 ? -1 : 1),
+		  speed: savedData[i]?.speed ?? (Math.random() * 1.5 + 1),
+		  nextDirectionChange: Date.now() + 2000 + Math.random() * 3000
+		}));
+
+		function randomInRange(min, max) {
+		  return Math.random() * (max - min) + min;
+		}
+
+		function savePositions() {
+		  localStorage.setItem(
+			POS_KEY,
+			JSON.stringify(
+			  states.map(s => ({
+				posX: s.posX,
+				direction: s.direction,
+				speed: s.speed
+			  }))
+			)
+		  );
+		}
+
+		function walk() {
+		  if (!enabled) return; // stop scheduling frames when off
+
+		  const now = Date.now();
+
+		  states.forEach((state, i) => {
+			if (now > state.nextDirectionChange) {
+			  state.direction = Math.random() < 0.5 ? -1 : 1;
+			  state.speed = randomInRange(1, 2.5);
+			  state.nextDirectionChange = now + 2000 + Math.random() * 4000;
+			}
+
+			state.posX += state.direction * state.speed;
+
+			if (state.posX < 60) {
+			  state.posX = 60;
+			  state.direction = 1;
+			}
+			if (state.posX > window.innerWidth - 300) {
+			  state.posX = window.innerWidth - 300;
+			  state.direction = -1;
+			}
+
+			state.el.style.left = state.posX + "px";
+			state.el.style.transform = `scaleX(${state.direction})`;
+
+			// throttle saves a bit
+			if (i === states.length - 1 && now % 20 < 1) savePositions();
+		  });
+
+		  rafId = requestAnimationFrame(walk);
+		}
+
+		function start() {
+		  if (rafId) cancelAnimationFrame(rafId);
+		  rafId = requestAnimationFrame(walk);
+		}
+
+		function stop() {
+		  if (rafId) cancelAnimationFrame(rafId);
+		  rafId = null;
+		  savePositions();
+		}
+
+		function setEnabled(next) {
+		  enabled = next;
+		  localStorage.setItem(STORAGE_KEY, String(enabled));
+		  setButtonLabel();
+		  applyVisibility();
+		  if (enabled) start();
+		  else stop();
+		}
+
+		// init UI + state
+		setButtonLabel();
+		applyVisibility();
+		if (enabled) start();
+
+		if (toggleBtn) {
+		  toggleBtn.addEventListener("click", () => {
+			setEnabled(!enabled);
+		  });
+		}
+	  });
+	</script>
+
+	<img class="character" src="../Images/Rat.gif" alt="a">
+	<img class="character" src="../Images/Fat.gif" alt="b">
+	<img class="character" src="../Images/Pat.gif" alt="c">
+
+	
+</body>
+</html>
