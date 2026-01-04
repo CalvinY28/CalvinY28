@@ -264,7 +264,75 @@
 	  #character-toggle:hover {
 		transform: scale(1.05);
 	  }
-	 
+
+		/* --- Lightbox (image expand) --- */
+		.lightbox {
+		  position: fixed;
+		  inset: 0;
+		  background: rgba(0,0,0,0.75);
+		  display: none;
+		  align-items: center;
+		  justify-content: center;
+		  padding: 24px;
+		  z-index: 5000;
+		}
+
+		.lightbox.open {
+		  display: flex;
+		}
+
+		.lightbox-content {
+		  max-width: min(1100px, 92vw);
+		  max-height: 86vh;
+		  width: auto;
+		  height: auto;
+		  border-radius: 12px;
+		  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+		  background: transparent;
+		}
+
+		.lightbox-caption {
+		  margin-top: 12px;
+		  color: #fff;
+		  text-align: center;
+		  font-size: 1rem;
+		  max-width: min(1100px, 92vw);
+		}
+
+		.lightbox-close {
+		  position: absolute;
+		  top: 18px;
+		  right: 18px;
+		  width: 44px;
+		  height: 44px;
+		  border: none;
+		  border-radius: 999px;
+		  background: rgba(255,255,255,0.18);
+		  color: #fff;
+		  font-size: 1.4rem;
+		  cursor: pointer;
+		}
+
+		.lightbox-close:hover {
+		  background: rgba(255,255,255,0.28);
+		}
+
+		/* Make art images feel clickable */
+		#art .gallery-item img {
+		  cursor: zoom-in;
+		}
+
+		/* Optional: smoother opening */
+		.lightbox-content {
+		  transform: scale(0.98);
+		  opacity: 0.0;
+		  transition: transform 0.15s ease, opacity 0.15s ease;
+		}
+		.lightbox.open .lightbox-content {
+		  transform: scale(1);
+		  opacity: 1;
+		}
+	  
   </style>
 </head>
 
@@ -294,36 +362,40 @@
     <!-- ART SECTION -->
     <section id="art" class="gallery-section active">
       <div class="gallery-item">
-        <img src="../Images/wallpaper6.PNG" alt="Art 1">
-        <p>Art Piece 1</p>
+        <img src="../Images/fox.jpg" alt="Art 1">
+        <p>Commissioned Piece</p>
       </div>
       <div class="gallery-item">
-        <img src="../Images/wallpaper6.PNG" alt="Art 2">
-        <p>Art Piece 2</p>
+        <img src="../Images/paimon.jpg" alt="Art 2">
+        <p>Fanart of Paimon from Genshin Impact</p>
       </div>
 	  <div class="gallery-item">
-        <img src="../Images/wallpaper6.PNG" alt="Art 3">
-        <p>Art Piece 3</p>
+        <img src="../Images/celeste.jpg" alt="Art 3">
+        <p>Fanart for the game Celeste</p>
       </div>
 	  <div class="gallery-item">
-        <img src="../Images/wallpaper6.PNG" alt="Art 4">
-        <p>Art Piece 4</p>
+        <img src="../Images/commison.jpg" alt="Art 4">
+        <p>Commissioned</p>
       </div>
 	  <div class="gallery-item">
-        <img src="Images/art2.jpg" alt="Art 5">
-        <p>Art Piece 5</p>
+        <img src="../Images/jolteon.gif" alt="Art 5">
+        <p>Animation of Jolteon from Pokémon</p>
       </div>
 	  <div class="gallery-item">
-        <img src="Images/art2.jpg" alt="Art 3">
-        <p>Art Piece 3</p>
+        <img src="../Images/commision2.png" alt="Art 3">
+        <p>Another Commission</p>
       </div>
 	  <div class="gallery-item">
-        <img src="Images/art2.jpg" alt="Art 4">
-        <p>Art Piece 4</p>
+        <img src="../Images/cardgame2.png" alt="Art 4">
+        <p>Art for a Card Game</p>
       </div>
 	  <div class="gallery-item">
-        <img src="Images/art2.jpg" alt="Art 5">
-        <p>Art Piece 5</p>
+        <img src="../Images/cardgame.png" alt="Art 5">
+        <p>Art for a Card Game</p>
+      </div>
+	  <div class="gallery-item">
+        <img src="../Images/doodle2.png" alt="Art 5">
+        <p>Assorted Doodles</p>
       </div>
     </section>
 
@@ -399,6 +471,66 @@
 		});
 	  });
 	</script>
+	
+	<!-- Lightbox Modal -->
+	<div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Expanded artwork">
+	  <button id="lightbox-close" class="lightbox-close" aria-label="Close">✕</button>
+	  <div style="display:flex; flex-direction:column; align-items:center;">
+		<img id="lightbox-img" class="lightbox-content" alt="">
+		<div id="lightbox-caption" class="lightbox-caption"></div>
+	  </div>
+	</div>
+	
+	<script>
+	  // Lightbox for ART section
+	  (function () {
+		const artSection = document.getElementById("art");
+		const lightbox = document.getElementById("lightbox");
+		const lbImg = document.getElementById("lightbox-img");
+		const lbCaption = document.getElementById("lightbox-caption");
+		const lbClose = document.getElementById("lightbox-close");
+
+		if (!artSection || !lightbox || !lbImg || !lbCaption || !lbClose) return;
+
+		function openLightbox(src, alt, caption) {
+		  lbImg.src = src;
+		  lbImg.alt = alt || "Artwork";
+		  lbCaption.textContent = caption || "";
+		  lightbox.classList.add("open");
+		  lightbox.setAttribute("aria-hidden", "false");
+		  document.body.style.overflow = "hidden"; // prevent background scroll
+		}
+
+		function closeLightbox() {
+		  lightbox.classList.remove("open");
+		  lightbox.setAttribute("aria-hidden", "true");
+		  lbImg.src = "";
+		  document.body.style.overflow = "";
+		}
+
+		// Click any art image to open
+		artSection.querySelectorAll(".gallery-item img").forEach(img => {
+		  img.addEventListener("click", () => {
+			const caption = img.closest(".gallery-item")?.querySelector("p")?.textContent?.trim();
+			openLightbox(img.src, img.alt, caption);
+		  });
+		});
+
+		// Close actions
+		lbClose.addEventListener("click", closeLightbox);
+
+		// Click outside image closes
+		lightbox.addEventListener("click", (e) => {
+		  if (e.target === lightbox) closeLightbox();
+		});
+
+		// ESC closes
+		document.addEventListener("keydown", (e) => {
+		  if (e.key === "Escape" && lightbox.classList.contains("open")) closeLightbox();
+		});
+	  })();
+	</script>
+
 
 	
 	<!-- Bouncy Header -->
