@@ -257,6 +257,44 @@
       margin-top: 0;
       overflow: hidden;
     }
+	  
+	.image-modal {
+	  position: fixed;
+	  inset: 0;
+	  background: rgba(0,0,0,0.75);
+	  display: none;
+	  align-items: center;
+	  justify-content: center;
+	  z-index: 5000;
+	}
+
+	.image-modal.active {
+	  display: flex;
+	}
+
+	.modal-content {
+	  text-align: center;
+	  max-width: 90%;
+	  max-height: 90%;
+	}
+
+	.modal-content img {
+	  max-width: 100%;
+	  max-height: 70vh;
+	  border-radius: 12px;
+	  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+	}
+
+	#modal-caption {
+	  margin-top: 1rem;
+	  font-size: 1rem;
+	  color: white;
+	  opacity: 0.85;
+	}
+	  
+	body.modal-open{
+	  overflow: hidden;
+	}
 
     footer {
       text-align: center;
@@ -425,6 +463,14 @@
   <footer>
     © 2025 Calvin Yang — All Rights Reserved
   </footer>
+	
+		<!-- IMAGE MODAL -->
+	<div id="image-modal" class="image-modal" aria-hidden="true">
+	  <div class="modal-content" role="dialog" aria-modal="true">
+		<img id="modal-img" alt="">
+		<p id="modal-caption"></p>
+	  </div>
+	</div>
 
   <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
   <button id="character-toggle" aria-label="Toggle characters">🧍 On</button>
@@ -449,17 +495,41 @@
 	
 	
   <script>
-    const galleryItems = document.querySelectorAll('.project-item');
+	document.addEventListener("DOMContentLoaded", () => {
+	  const items = document.querySelectorAll(".project-item");
+	  const modal = document.getElementById("image-modal");
+	  const modalImg = document.getElementById("modal-img");
+	  const modalCaption = document.getElementById("modal-caption");
 
-    galleryItems.forEach((item) => {
-      item.addEventListener('click', () => {
-        const isExpanded = item.classList.contains('is-expanded');
-        galleryItems.forEach((other) => other.classList.remove('is-expanded'));
-        if (!isExpanded) {
-          item.classList.add('is-expanded');
-        }
-      });
-    });
+	  function openModal(src, captionText){
+		modalImg.src = src;
+		modalCaption.textContent = captionText || "";
+		modal.classList.add("active");
+		document.body.classList.add("modal-open"); // lock scroll
+	  }
+
+	  function closeModal(){
+		modal.classList.remove("active");
+		document.body.classList.remove("modal-open"); // unlock scroll
+		modalImg.removeAttribute("src");
+	  }
+
+	  items.forEach(item => {
+		item.addEventListener("click", () => {
+		  const img = item.querySelector("img");
+		  const caption = item.querySelector(".project-caption");
+		  openModal(img.src, caption?.textContent);
+		});
+	  });
+
+	  modal.addEventListener("click", (e) => {
+		if (e.target === modal) closeModal();
+	  });
+
+	  document.addEventListener("keydown", (e) => {
+		if (e.key === "Escape") closeModal();
+	  });
+	});
   </script>
 	
 	
