@@ -278,11 +278,18 @@
 	  max-height: 90%;
 	}
 
-	.modal-content img {
+	.modal-content img{
 	  max-width: 100%;
-	  max-height: 70vh;
+	  max-height: 80vh;
 	  border-radius: 12px;
 	  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+	  transform-origin: center center;
+	  will-change: transform;
+	  cursor: zoom-in;
+	}
+	  
+	.modal-content img.zoomed{
+	  cursor: zoom-out;
 	}
 
 	#modal-caption {
@@ -500,43 +507,66 @@
   </script>
 	
 	
-  <script>
-	document.addEventListener("DOMContentLoaded", () => {
-	  const items = document.querySelectorAll(".project-item");
-	  const modal = document.getElementById("image-modal");
-	  const modalImg = document.getElementById("modal-img");
-	  const modalCaption = document.getElementById("modal-caption");
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+		  const items = document.querySelectorAll(".project-item");
+		  const modal = document.getElementById("image-modal");
+		  const modalImg = document.getElementById("modal-img");
+		  const modalCaption = document.getElementById("modal-caption");
 
-	  function openModal(src, captionText){
-		modalImg.src = src;
-		modalCaption.textContent = captionText || "";
-		modal.classList.add("active");
-		document.body.classList.add("modal-open"); // lock scroll
-	  }
+		  let scale = 1;
+		  const minScale = 1;
+		  const maxScale = 4;
 
-	  function closeModal(){
-		modal.classList.remove("active");
-		document.body.classList.remove("modal-open"); // unlock scroll
-		modalImg.removeAttribute("src");
-	  }
+		  function openModal(src, captionText){
+			scale = 1;
+			modalImg.style.transform = `scale(${scale})`;
+			modalImg.src = src;
+			modalCaption.textContent = captionText || "";
+			modal.classList.add("active");
+			document.body.classList.add("modal-open");
+		  }
 
-	  items.forEach(item => {
-		item.addEventListener("click", () => {
-		  const img = item.querySelector("img");
-		  const caption = item.querySelector(".project-caption");
-		  openModal(img.src, caption?.textContent);
+		  function closeModal(){
+			modal.classList.remove("active");
+			document.body.classList.remove("modal-open");
+			modalImg.removeAttribute("src");
+		  }
+
+		  items.forEach(item=>{
+			item.addEventListener("click", ()=>{
+			  const img = item.querySelector("img");
+			  const caption = item.querySelector(".project-caption");
+			  openModal(img.src, caption?.textContent);
+			});
+		  });
+
+		  modal.addEventListener("click", e=>{
+			if(e.target === modal) closeModal();
+		  });
+
+		  document.addEventListener("keydown", e=>{
+			if(e.key === "Escape") closeModal();
+		  });
+
+		  /* wheel zoom */
+		  modalImg.addEventListener("wheel", e=>{
+			e.preventDefault();
+
+			const zoomSpeed = 0.15;
+
+			if(e.deltaY < 0){
+			  scale += zoomSpeed;
+			} else {
+			  scale -= zoomSpeed;
+			}
+
+			scale = Math.min(Math.max(scale, minScale), maxScale);
+
+			modalImg.style.transform = `scale(${scale})`;
+		  });
 		});
-	  });
-
-	  modal.addEventListener("click", (e) => {
-		if (e.target === modal) closeModal();
-	  });
-
-	  document.addEventListener("keydown", (e) => {
-		if (e.key === "Escape") closeModal();
-	  });
-	});
-  </script>
+	</script>
 	
 	
 	<!-- Bouncy Header -->
